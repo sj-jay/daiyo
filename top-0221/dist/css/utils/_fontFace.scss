@@ -1,0 +1,68 @@
+@use "sass:math";
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Noto+Sans+JP:wght@500;700&family=Noto+Serif+JP:wght@700;900&display=swap');
+
+@mixin notoSerifJP {
+    font-family: 'Noto Serif JP', serif;
+    font-style: normal;
+}
+
+// Noto Sans JP, 源ノ角ゴシック
+@mixin notoSansJP {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: normal;
+}
+
+@mixin libreBaskerville {
+    font-family: 'Libre Baskerville', serif;
+    font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+// ==============================
+// Font size mixin
+// ==============================
+
+$font-lock-min: 320px !default;
+$font-lock-max: 770px !default;
+
+//  font-size 
+@mixin font-size($min, // font-size 
+    $max: null, // optional maximum font size
+    $lock-min: $font-lock-min, // optional minimum viewport width 
+    $lock-max: $font-lock-max // optional maximum viewport width 
+
+) {
+    @if $max {
+        font-size: toRem(num($max));
+
+        @media (min-width: $lock-min) and (max-width: $lock-max) {
+            font-size: calc(#{toRem(num($min))} + #{num($max) - num($min)} * (100vw - #{toRem(num($lock-min)) }) / #{num($lock-max) - num($lock-min)});
+        }
+    }
+}
+
+
+//  strip units helper function
+@function num($input) {
+    @return math.div($input, $input * 0 + 1);
+}
+
+// change px to rem
+@function toRem($value) {
+    $remValue: math.div($value, 16) * 1rem;
+    @return $remValue;
+}
+
+
+// Fluid Responsive Font Size Mixin for ALL Breakpoints
+@function fontSize($size) {
+    @return calc(#{ calc( math.div($size, $size * 0 + 1) / 16 * 1rem)} + 0.390635vw);
+    // use: @include fs(16px);
+}

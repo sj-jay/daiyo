@@ -1,0 +1,75 @@
+@use "sass:math";
+
+
+.d-flex {
+    display: flex;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+@mixin scale($value) {
+    -webkit-transform: scale($value);
+    -moz-transform: scale($value);
+    -ms-transform: scale($value);
+    -o-transform: scale($value);
+    transform: scale($value);
+}
+
+@mixin borderRadius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+
+@mixin absoluteCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+
+@mixin absoluteCustom($top, $left) {
+    $t-left: ($left * -1);
+    $t-top: ($top * -1);
+    position: absolute;
+    left: $left;
+    top: $top;
+
+    -webkit-transform: translate($t-left, $t-top);
+    -moz-transform: translate($t-left, $t-top);
+    -ms-transform: translate($t-left, $t-top);
+    -o-transform: translate($t-left, $t-top);
+    transform: translate($t-left, $t-top);
+}
+
+@mixin translateY($top) {
+    $t-top: ($top * -1);
+    top: $top;
+
+    -webkit-transform: translateY($t-top);
+    -moz-transform: translateY($t-top);
+    -ms-transform: translateY($t-top);
+    -o-transform: translateY($t-top);
+    transform: translateY($t-top);
+}
+
+@mixin translateX($left) {
+
+    -webkit-transform: translateX($left);
+    -moz-transform: translateX($left);
+    -ms-transform: translateX($left);
+    -o-transform: translateX($left);
+    transform: translateX($left);
+}
